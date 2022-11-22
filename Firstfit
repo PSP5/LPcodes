@@ -1,37 +1,70 @@
-package spos;
+package single;
 
-public class first_fit {
-	static void firstFit(int blockSize[], int m, int processSize[], int n) {
+import java.util.*;
+class FIRSTFIT
+{
+	
+	static void firstFit(int blockSize[], int m,int processSize[], int n)
+	{
+		
 		int allocation[] = new int[n];
-		for(int i=0;i<allocation.length;i++) {
+	
+		for (int i = 0; i < allocation.length; i++)
 			allocation[i] = -1;
-		}
-		for(int i=0;i<n;i++) {
-			for(int j=0;j<m;j++) {
-				if(blockSize[j] >= processSize[i]) {
+	
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < m; j++)
+			{
+				if (blockSize[j] >= processSize[i])
+				{
+					// allocate block j to p[i] process
 					allocation[i] = j;
+	
+					// Reduce available memory in this block.
 					blockSize[j] -= processSize[i];
+	
 					break;
 				}
 			}
 		}
+	
 		System.out.println("\nProcess No.\tProcess Size\tBlock no.");
-		for(int i=0;i<n;i++) {
-//			System.out.println(" "+(i+1)+"\t\t"+processSize[i]+"\t\t");
-			if(allocation[i] !=-1) {
-				System.out.println(" "+(i+1)+"\t\t"+processSize[i]+"\t\t"+ (allocation[i]+1));
-			}
-			else {
-				System.out.println(" "+(i+1)+"\t\t"+processSize[i]+"\t\tNot Allowed");
-			}
+		for (int i = 0; i < n; i++)
+		{
+			System.out.print(" " + (i+1) + "\t\t" +	processSize[i] + "\t\t");
+			if (allocation[i] != -1)
+				System.out.print(allocation[i] + 1);
+			else
+				System.out.print("Not Allocated");
+			System.out.println();
 		}
 	}
-	public static void main(String args[]) {
+	
+	
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		int nb,np;
 		
-		int blockSize[] = {100,500, 200,300, 600};
-		int processSize[] = {212, 417, 112, 426};
-		int m = blockSize.length;
-		int n = processSize.length;
-		firstFit(blockSize,m,processSize,n);
+		System.out.println("Enter no. of blocks: ");
+		nb = sc.nextInt();
+		
+		System.out.println("Enter no. of processes: ");
+		np = sc.nextInt();
+		int blockSize[] = new int[nb];
+		
+		System.out.println("Enter block sizes: ");
+		for(int i =0; i<nb;i++) {
+			 blockSize[i] = sc.nextInt();
+		}
+		int processSize[] = new int[np];
+		System.out.println("Enter sizes of processes: ");
+		for(int i =0; i<np;i++) {
+			processSize[i] = sc.nextInt();
+		}
+		
+		
+		firstFit(blockSize, nb, processSize, np);
 	}
 }
