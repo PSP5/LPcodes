@@ -1,6 +1,5 @@
-import java.util.Scanner;
-
-public class RoundRobinNonPreemptive  
+import java.util.Scanner;  
+public class RoundRobinPreemptive  
 {  
 public static void main(String args[])  
 {  
@@ -10,7 +9,7 @@ bt = new int[10];
 wt = new int[10];  
 tat = new int[10];  
 rem_bt = new int[10];  
-Scanner s = new Scanner(System.in);  
+Scanner s=new Scanner(System.in);  
 System.out.print("Enter the number of process (maximum 10) = ");  
 n = s.nextInt();  
 System.out.print("Enter the burst time of the process\n");  
@@ -54,7 +53,7 @@ for(i=0;i<n;i++)
 wt[i]=tat[i]-bt[i];  
 awt=awt+wt[i];  
 atat=atat+tat[i];  
-System.out.print("\n "+(i+1)+"\t\t\t"+bt[i]+"\t\t\t"+tat[i]+"\t\t\t"+wt[i]+"\n");  
+System.out.print("\n "+(i+1)+"\t\t\t "+bt[i]+"\t\t\t "+tat[i]+"\t\t\t "+wt[i]+"\n");  
 }  
 awt=awt/n;  
 atat=atat/n;  
